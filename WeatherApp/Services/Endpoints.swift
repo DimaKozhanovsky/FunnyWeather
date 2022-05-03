@@ -10,12 +10,11 @@ import Foundation
 struct Endpoints {
     static let baseURL = "https://api.openweathermap.org/data/2.5/"
     static let apiKey = "651e21ae2d554489aadd16a61048e96a"
-    
     static let for4day = "forecast/hourly?lat={lat}&lon={lon}&appid={API key}"
-    
-    
+    let imageOfsky = "https://openweathermap.org/img/wn/02n@2x.png"
     static func getCurruntWeatherEndpoint(lat: Double, lon: Double) -> String {
         let endpoint = "weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)"
         return baseURL + endpoint
     }
+    
 }
