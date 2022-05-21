@@ -12,6 +12,7 @@ enum NetworkError: Error {
     case noData
     case decodingError
 }
+ 
 
 
 extension URL {
@@ -25,6 +26,14 @@ extension URL {
 
 
 class NetworkService {
+    
+    let imageCache = NSCache<NSString,NSData>()
+    
+    static let shared = NetworkService()
+    
+    private init() {}
+    
+    
     
     func getWeather(complition: @escaping (Result<CityWeatherModel, NetworkError>) -> Void) {
         guard let url = URL.weaterURL() else {
@@ -48,6 +57,26 @@ class NetworkService {
             }
         }.resume()
         
+        
     }
-    
+    func getImage( imageCode : String, completion: @escaping (Data?) -> Void) {
+        let urlString =  Endpoints.reciveImage(code: imageCode)
+      guard let url = URL(string: urlString) else {
+        completion(nil)
+        return
+      }
+      if let cacheImage = imageCache.object(forKey: NSString(string: urlString)) {
+        completion(cacheImage as Data)
+      } else {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+          guard error == nil, let data = data else {
+            completion(nil)
+            return
+          }
+          self.imageCache.setObject(data as NSData, forKey: NSString(string: urlString))
+          completion(data)
+        }.resume()
+      }
+    }
+
 }

@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
-    
+    //MARK: - Properties
     var body: some View {
-        
+        //MARK: - Body
         TabView {
             TodayView()
                 .tabItem {
@@ -30,6 +28,8 @@ struct ContentView: View {
     }
     
 }
+
+//MARK: - Previews
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

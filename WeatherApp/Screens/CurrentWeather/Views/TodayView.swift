@@ -23,7 +23,10 @@ struct TodayView: View {
         case .error:
             Text("Error")
             
-        case .success(let model):
+        case .success(let model, let imageData):
+            TodayBodyView(model: model ,imageData: imageData)
+    
+        case .weatherImage(let model):
             TodayBodyView(model: model)
         }
         

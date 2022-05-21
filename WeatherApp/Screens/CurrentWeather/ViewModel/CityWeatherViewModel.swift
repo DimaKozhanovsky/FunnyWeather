@@ -10,34 +10,50 @@ import Foundation
 enum TodayViewState {
     case idle
     case error
-    case success(CityWeatherModel)
+    case success(CityWeatherModel, Data?)
+    case weatherImage(CityWeatherModel )
 }
 
-class CityWeatherViewModel: ObservableObject {
-    
+final class CityWeatherViewModel: ObservableObject {
+    //MARK: - Properties
     @Published var state: TodayViewState = .idle
-    
-    
-    let networkService = NetworkService()
-    
+
     func getData() {
-        
-        networkService.getWeather { result in
+       
+        NetworkService.shared.getWeather { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     print(error)
                     self.state = .error
                 case .success(let model):
-                    self.state = .success(model)
-                    
+                    self.state = .weatherImage(model)
+                    self.getWeatherIcon(model: model  )
                 }
             }
             
         }
         
     }
+    //MARK : Publik Methods
+    // Get  image  from the server and is displayed it via using main tread  
+    func getWeatherIcon(model : CityWeatherModel ){
+        
+        let imageCode = model.weather.first?.codeIcon
+        guard let imageCode = imageCode else {
+            return
+        }
+        NetworkService.shared.getImage(imageCode: imageCode) { (result) in
+            guard let result = result else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.state = TodayViewState.success( model, result)
+            }
+        }
+    }
     
+   // This function is set the titles of the wind
     func convertDegress (degrees : Double ) -> String {
         var out : String
         switch  degrees {

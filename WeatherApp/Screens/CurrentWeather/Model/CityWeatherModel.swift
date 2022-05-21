@@ -18,7 +18,6 @@ struct CityWeatherModel: Decodable {
     let sys: Sys
     let rain : Rain?
     var name: String
-    
 }
 
 // MARK: - Clouds
@@ -50,11 +49,12 @@ struct Sys: Decodable {
 // MARK: - Weather
 struct Weather: Decodable {
     
-    let main , icon: String
+    let main: String
+    let codeIcon : String
     
     enum CodingKeys: String, CodingKey {
         case  main
-        case icon
+        case codeIcon = "icon"
     }
 }
 
