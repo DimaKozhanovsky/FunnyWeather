@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import CoreLocation
 
-enum NetworkError: Error {
+enum NetworkError: Error { // simple enum to handle network erors from the side of the server
     case badUrl
     case noData
     case decodingError
@@ -15,9 +16,9 @@ enum NetworkError: Error {
  
 
 
-extension URL {
-    static func weaterURL() -> URL? {
-        guard let url = URL(string: Endpoints.getCurruntWeatherEndpoint(lat: 53.893009, lon: 27.567444)) else {
+extension URL { // A simple extension helps us to prevent  the force unwrap we likely have to copy over throughout our codebase by using a custom initializer .Allows us to keep our implementation code clean from unwraps
+    static func weaterURL( lat : Double , lon : Double) -> URL? {
+        guard let url = URL(string: Endpoints.getCurruntWeatherEndpoint(lat:lat , lon: lon)) else {
             return nil
         }
         return url
@@ -35,11 +36,11 @@ class NetworkService {
     
     
     
-    func getWeather(complition: @escaping (Result<CityWeatherModel, NetworkError>) -> Void) {
-        guard let url = URL.weaterURL() else {
+    func getWeather(location : CLLocation ,complition: @escaping (Result<CityWeatherModel, NetworkError>) -> Void) {
+        guard let url = URL.weaterURL(lat: location.coordinate.latitude, lon: location.coordinate.longitude ) else {
             return complition(Result.failure(.badUrl))
         }
-        
+//        (lat: 53.893009, lon:27.567444
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 return complition(.failure(.noData))

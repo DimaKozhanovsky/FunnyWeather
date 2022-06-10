@@ -11,23 +11,24 @@ struct TodayView: View {
     
     @StateObject var cityWeatherViewModel = CityWeatherViewModel()
     
+    
     var body: some View {
         switch cityWeatherViewModel.state {
             
         case .idle:
             ProgressView()
                 .onAppear {
+          
                     cityWeatherViewModel.getData()
                 }
             
         case .error:
             Text("Error")
             
-        case .success(let model, let imageData):
-            TodayBodyView(model: model ,imageData: imageData)
+        
     
-        case .weatherImage(let model):
-            TodayBodyView(model: model)
+        case .recievedWheather(let model) :
+            TodayBodyView(model: model )
         }
         
     }

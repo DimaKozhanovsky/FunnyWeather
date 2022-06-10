@@ -9,8 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     //MARK: - Properties
+    init (){
+       LocationManager.shared.updateCurrentLocation()
+    }
     var body: some View {
         //MARK: - Body
+       
         TabView {
             TodayView()
                 .tabItem {
@@ -25,6 +29,9 @@ struct ContentView: View {
                     Text("Forecast")
                 }
         }
+      
+           
+        
     }
     
 }

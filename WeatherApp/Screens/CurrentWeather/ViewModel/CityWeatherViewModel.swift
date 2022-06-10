@@ -6,28 +6,32 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum TodayViewState {
     case idle
     case error
-    case success(CityWeatherModel, Data?)
-    case weatherImage(CityWeatherModel )
+    case recievedWheather(TodayWheatherModel)
 }
 
+
+//manage state from external objects with ObservableObject
 final class CityWeatherViewModel: ObservableObject {
     //MARK: - Properties
     @Published var state: TodayViewState = .idle
-
+     
+    
     func getData() {
-       
-        NetworkService.shared.getWeather { result in
+        let location = LocationManager.shared.userLocation
+        NetworkService.shared.getWeather(location: location ?? CLLocation(latitude:51.509865,   longitude: -0.118092)) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     print(error)
                     self.state = .error
                 case .success(let model):
-                    self.state = .weatherImage(model)
+                    let wheather = TodayWheatherModel(model:model , imageData: nil, shareWheather: self.shareWheather)
+                    self.state = .recievedWheather(wheather)
                     self.getWeatherIcon(model: model  )
                 }
             }
@@ -48,7 +52,8 @@ final class CityWeatherViewModel: ObservableObject {
                 return
             }
             DispatchQueue.main.async {
-                self.state = TodayViewState.success( model, result)
+            
+                self.state = TodayViewState.recievedWheather(TodayWheatherModel(model: model, imageData: result, shareWheather: self.shareWheather ))
             }
         }
     }
@@ -80,4 +85,9 @@ final class CityWeatherViewModel: ObservableObject {
         return out
     }
     
+    func shareWheather() {
+   
+        }
+    
 }
+
