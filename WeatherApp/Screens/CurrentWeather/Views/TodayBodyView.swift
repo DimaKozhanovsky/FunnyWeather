@@ -20,7 +20,7 @@ struct TodayBodyView: View {
             Image("MulticolorStripe")
                 .frame(width: 1, height: 2)
             Spacer()
-            Group{
+            Group{ 
                 if let imageData = model.imageData {
                     Image(uiImage: UIImage(data: imageData) ?? weatherPlaceHolder)
                 }
