@@ -36,7 +36,7 @@ class NetworkService {
     
     
     
-    func getWeather(location : CLLocation ,complition: @escaping (Result<CityWeatherModel, NetworkError>) -> Void) {
+    func getWeather(location : CLLocation ,complition: @escaping (Result<AllDataForTodayWeatherModel, NetworkError>) -> Void) {
         guard let url = URL.weaterURL(lat: location.coordinate.latitude, lon: location.coordinate.longitude ) else {
             return complition(Result.failure(.badUrl))
         }
@@ -51,7 +51,7 @@ class NetworkService {
             }
             
             do {
-                let weatherResponse = try JSONDecoder().decode(CityWeatherModel.self, from: data)
+                let weatherResponse = try JSONDecoder().decode(AllDataForTodayWeatherModel.self, from: data)
                 complition(.success(weatherResponse))
             } catch {
                 return complition(.failure(.decodingError))

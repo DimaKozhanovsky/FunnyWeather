@@ -20,12 +20,18 @@ class LocationManager : NSObject ,ObservableObject { // ObservableOblect means t
         manager.delegate = self // points out on the propierty inside the class
       
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        updateCurrentLocation()
+        sheduling()
     }
     // updating location every time when we call this method
     
-    func updateCurrentLocation() {
-        
+   
+    
+    func sheduling ( ) {
+         Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(updateCurrentLocation), userInfo: nil, repeats: true)
+        print("it works")
+       
+    }
+    @objc func updateCurrentLocation() {
         
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()

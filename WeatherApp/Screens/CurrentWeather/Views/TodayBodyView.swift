@@ -11,6 +11,7 @@ struct TodayBodyView: View {
     
     //MARK: - Properties
     var model : TodayWheatherModel
+    @State var isShowLocationView = false
     
     let weatherPlaceHolder = UIImage(systemName: "thermometer.sun")!
     //MARK: - Body
@@ -27,14 +28,21 @@ struct TodayBodyView: View {
                 else {
                     Image(uiImage: weatherPlaceHolder)
                 }
-//
-//                    .frame(width:100 , height: 100)
-//                    .scaleEffect(3)
-//                    .foregroundColor(.yellow)
+
                 Text(model.model.name + ", " + model.model.sys.country)
                 Text( String(model.model.main.temp) + "°C |" + (model.model.weather[0]).main)
                     .foregroundColor(.blue)
             }
+         
+           
+            Button(action: {
+                isShowLocationView = true
+            }) {
+                Text("Share")
+            }
+            
+            
+            
             Spacer()
             Divider()
                 .frame(width: 100)

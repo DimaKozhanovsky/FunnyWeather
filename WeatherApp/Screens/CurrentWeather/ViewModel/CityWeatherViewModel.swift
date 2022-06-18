@@ -41,7 +41,7 @@ final class CityWeatherViewModel: ObservableObject {
     }
     //MARK : Publik Methods
     // Get  image  from the server and is displayed it via using main tread  
-    func getWeatherIcon(model : CityWeatherModel ){
+    func getWeatherIcon(model : AllDataForTodayWeatherModel ){
         
         let imageCode = model.weather.first?.codeIcon
         guard let imageCode = imageCode else {
@@ -86,8 +86,8 @@ final class CityWeatherViewModel: ObservableObject {
     }
     
     func shareWheather() {
-   
+            
         }
-    
+    let location = LocationManager.shared.userLocation
 }
 

@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     //MARK: - Properties
     init (){
-       LocationManager.shared.updateCurrentLocation()
+       LocationManager.shared.sheduling()
     }
     var body: some View {
         //MARK: - Body

@@ -10,7 +10,7 @@
 import Foundation
 
 // MARK: - CityWeatherModel
-struct CityWeatherModel: Decodable {
+struct AllDataForTodayWeatherModel: Decodable {
     let weather: [Weather]
     let main: Main
     let wind: Wind

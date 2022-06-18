@@ -7,7 +7,7 @@
 
 import Foundation
 struct TodayWheatherModel { //The default memberwise initializer 
-    var model: CityWeatherModel
+    var model: AllDataForTodayWeatherModel
     var imageData : Data?
     var shareWheather : ()->()
 }
