@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import CoreLocationUI
 
 struct TodayBodyView: View {
     
     //MARK: - Properties
     var model : TodayWheatherModel
-    @State var isShowLocationView = false
-    
+//@State var isShowLocationView = false
+  
     let weatherPlaceHolder = UIImage(systemName: "thermometer.sun")!
     //MARK: - Body
     var body: some View {
@@ -34,13 +35,21 @@ struct TodayBodyView: View {
                     .foregroundColor(.blue)
             }
          
-           
-            Button(action: {
-                isShowLocationView = true
-            }) {
-                Text("Share")
-            }
             
+            if #available(iOS 15.0, *) {
+                LocationButton(.shareCurrentLocation){
+                    
+                }
+            } else {
+                // Fallback on earlier versions
+            }
+           
+//            Button(action: {
+//                isShowLocationView = true
+//            }) {
+//                Text("Share")
+//            }
+//
             
             
             Spacer()
@@ -101,7 +110,9 @@ struct TodayBodyView: View {
 //
 //        }
     }
+        .preferredColorScheme(.dark)
 }
+        
 }
 //MARK: - Prewiew 
 struct TodayBodyView_Previews: PreviewProvider {

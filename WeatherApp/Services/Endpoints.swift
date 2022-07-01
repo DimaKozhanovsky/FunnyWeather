@@ -17,12 +17,18 @@ struct Endpoints {
         let endpoint = "weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)"
         return baseURL + endpoint
     }
+    static func getForecastWheater(lat: Double ,lon : Double ) -> String {
+        let endpoint = " forecast/hourly?lat=\(lat)&lon=\(lon)&appid=\(apiKey)"
+        return baseURL + endpoint
+    }
+    
     static func reciveImage (code : String ) -> String {
         let endpoint = "http://openweathermap.org/img/wn/\(code)@2x.png"
         return endpoint
     }
     static  func getHourlyForecast ( lat : Double ,lon : Double) ->
     String {
+        
         let edpoint = "https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=\(lat)&lon=\(lon)&appid=\(apiKey)"
         return edpoint
     }

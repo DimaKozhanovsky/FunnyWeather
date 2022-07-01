@@ -7,14 +7,23 @@
 
 import SwiftUI
 
-struct ForecastView: View {
-    var body: some View {
-        Text("Hello, Worldddd!")
-    }
-}
+struct ForecastView : View {
+    @StateObject var forecastViewModel = ForecastViewModel()
+ var body: some View {
+    //is adressed to the  @Published var state in ViewModel
 
-struct ForecastView_Previews: PreviewProvider {
-    static var previews: some View {
-        ForecastView()
+        switch forecastViewModel.state {
+        case .idle :
+            ProgressView()
+                .onAppear {
+                    forecastViewModel.getDataForForecast()
+                }
+        case .error:
+            Text("Error")
+        case .recivedForecastWheather(let model):
+            Text ("ВВВ")
+        }
+        
+        Text("Helow world ")
     }
 }

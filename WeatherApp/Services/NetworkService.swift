@@ -17,8 +17,16 @@ enum NetworkError: Error { // simple enum to handle network erors from the side 
 
 
 extension URL { // A simple extension helps us to prevent  the force unwrap we likely have to copy over throughout our codebase by using a custom initializer .Allows us to keep our implementation code clean from unwraps
-    static func weaterURL( lat : Double , lon : Double) -> URL? {
+    static func weatherURL( lat : Double , lon : Double) -> URL? {
         guard let url = URL(string: Endpoints.getCurruntWeatherEndpoint(lat:lat , lon: lon)) else {
+            return nil
+        }
+        return url
+    }
+    
+    static func weatherForecastURL(lat : Double , lon : Double) -> URL? {
+        guard let url = URL(string: Endpoints.getForecastWheater(lat: lat, lon: lon)) // take lat and long from wheatherforecastURL
+        else {
             return nil
         }
         return url
@@ -26,7 +34,7 @@ extension URL { // A simple extension helps us to prevent  the force unwrap we l
 }
 
 
-class NetworkService {
+class NetworkService  : Error {
     
     let imageCache = NSCache<NSString,NSData>()
     
@@ -37,8 +45,9 @@ class NetworkService {
     
     
     func getWeather(location : CLLocation ,complition: @escaping (Result<AllDataForTodayWeatherModel, NetworkError>) -> Void) {
-        guard let url = URL.weaterURL(lat: location.coordinate.latitude, lon: location.coordinate.longitude ) else {
-            return complition(Result.failure(.badUrl))
+        guard let url = URL.weatherURL(lat: location.coordinate.latitude, lon: location.coordinate.longitude )
+        else {
+            return complition(Result.failure(.badUrl)) // check if url incorrect and recive it as result im parametr complition
         }
 //        (lat: 53.893009, lon:27.567444
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -51,15 +60,43 @@ class NetworkService {
             }
             
             do {
-                let weatherResponse = try JSONDecoder().decode(AllDataForTodayWeatherModel.self, from: data)
+                // use try before function where rather just could be failed$
+                let weatherResponse = try   JSONDecoder().decode(AllDataForTodayWeatherModel.self, from: data)
                 complition(.success(weatherResponse))
             } catch {
                 return complition(.failure(.decodingError))
             }
         }.resume()
-        
-        
     }
+        func getForcastWether(location : CLLocation , complition : @escaping (Result<ForeCastWeatherModel , NetworkError>) ->Void ) {  //defenition of the type of data for frozen enum Result for closure complition
+            guard let url = URL.weatherForecastURL(lat: location.coordinate.latitude, lon: location.coordinate.longitude) else {
+                return complition(Result.failure(.badUrl))
+            }
+            URLSession.shared.dataTask(with: url) {
+                data, response , error in
+                guard let data = data , error == nil else {
+                    return complition(.failure(.noData))
+                }
+                if let response = response {
+                    print(response)
+                }
+                do {
+                let weatherResponse = try JSONDecoder().decode(ForeCastWeatherModel.self, from: data)
+                complition(.success(weatherResponse))
+                        } catch {
+                        return complition(.failure(.decodingError))
+                    }
+                }
+            .resume()
+            //If you look carefully at the way we do a network call, we aren’t immediately doing anything with the code inside of our dataTask. The dataTask method returns a URLSessionDataTask object that you can use for Asynchronous operations.
+            
+                
+            }
+            
+        
+        
+        
+    
     func getImage( imageCode : String, completion: @escaping (Data?) -> Void) {
         let urlString =  Endpoints.reciveImage(code: imageCode)
       guard let url = URL(string: urlString) else {
