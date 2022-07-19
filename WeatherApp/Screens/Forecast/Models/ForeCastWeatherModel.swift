@@ -40,7 +40,7 @@ struct List : Decodable {
     let dt: Int?
     let main: MainClass?
 
-
+ппп
     let visibility: Int?
     let pop: Double?
 
