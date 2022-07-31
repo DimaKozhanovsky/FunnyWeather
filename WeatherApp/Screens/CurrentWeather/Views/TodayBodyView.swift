@@ -110,7 +110,7 @@ struct TodayBodyView: View {
 //
 //        }
     }
-        .preferredColorScheme(.dark)
+      //  .preferredColorScheme(.dark)
 }
         
 }

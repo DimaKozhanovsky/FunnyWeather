@@ -68,7 +68,7 @@ class NetworkService  : Error {
             }
         }.resume()
     }
-        func getForcastWether(location : CLLocation , complition : @escaping (Result<ForeCastWeatherModel , NetworkError>) ->Void ) {  //defenition of the type of data for frozen enum Result for closure complition
+        func getForcastWether(location : CLLocation , complition : @escaping (Result<ForecastWeatherModel , NetworkError>) ->Void ) {  //defenition of the type of data for frozen enum Result for closure complition
             guard let url = URL.weatherForecastURL(lat: location.coordinate.latitude, lon: location.coordinate.longitude) else {
                 return complition(Result.failure(.badUrl))
             }
@@ -81,7 +81,7 @@ class NetworkService  : Error {
                     print(response)
                 }
                 do {
-                let weatherResponse = try JSONDecoder().decode(ForeCastWeatherModel.self, from: data)
+                let weatherResponse = try JSONDecoder().decode(ForecastWeatherModel.self, from: data)
                 complition(.success(weatherResponse))
                         } catch {
                         return complition(.failure(.decodingError))

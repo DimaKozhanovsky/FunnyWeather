@@ -10,7 +10,7 @@ import CoreLocation
 enum ForcastViewState {
     case idle
     case error
-    case recivedForecastWheather(ForecastWheatherModel)
+    case recivedForecastWheather(ForecastWeatherModel)
 }
 
 final class ForecastViewModel : ObservableObject{
@@ -26,7 +26,7 @@ final class ForecastViewModel : ObservableObject{
                 print(error)
                 self.state = .error //from array
             case .success(let model):
-                let wheather = ForecastWheatherModel(model: model)
+                self.state = .recivedForecastWheather(model)
                 
             }
         }

@@ -12,6 +12,7 @@ struct ContentView: View {
     init (){
        LocationManager.shared.sheduling()
     }
+//        @State var selectedTab : Tab =
     var body: some View {
         //MARK: - Body
        
@@ -29,12 +30,18 @@ struct ContentView: View {
                     Text("Forecast")
                 }
         }
-      
-           
-        
     }
-    
 }
+//        extension ContentView {
+//            enum Tab : Hashable {  // protocol Hashable is used to  able and store essences , in this case cases of enum Tab in arrays ( streamlined) or  Sets ( not stremlined)
+//                case home
+//                case more
+//            }
+//        }
+//
+//
+//
+//}
 
 //MARK: - Previews
 
