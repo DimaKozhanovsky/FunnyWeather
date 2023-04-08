@@ -18,7 +18,7 @@ struct Endpoints {
         return baseURL + endpoint
     }
     static func getForecastWheater(lat: Double ,lon : Double ) -> String {
-        let endpoint = " forecast/hourly?lat=\(lat)&lon=\(lon)&appid=\(apiKey)"
+        let endpoint = "forecast?lat=\(lat)&lon=\(lon)&appid=\(apiKey)"
         return baseURL + endpoint
     }
     

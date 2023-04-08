@@ -15,5 +15,30 @@ import Foundation
 
 // MARK: - CityWeatherModel
 struct ForecastWeatherModel : Decodable {
-    let cod: String?
+    let list : [ForeCastForNextDays]? 
+    
+    
 }
+ struct ForeCastForNextDays : Decodable ,Identifiable{
+     var id = UUID() // уникальный код объекта чтоб сравнивать 2 погоды (2 обьекта) чтоб вручну
+    let dt : Int?
+    let main : Parameters?
+    let weather : [IconsForForecast]?
+     enum CodingKeys : String, CodingKey {
+         case dt
+         case main
+         case weather
+     }
+}
+
+
+struct Parameters : Decodable {
+    let temp : Double?
+}
+
+struct IconsForForecast : Decodable {
+    let main : String?
+    let description : String?
+    let icon : String?
+}
+

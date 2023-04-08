@@ -21,9 +21,10 @@ struct ForecastView : View {
         case .error:
             Text("Error")
         case .recivedForecastWheather(let model):
-            Text ("ВВВ")
+            //declaring a value as let means that it is a constant i.e. immutable
+            //you are getting the warning because instead of modifying the value as you intended, you are redeclaring it within the scope
+            ForecastBodyView(model: model)
         }
         
-        Text("Helow world ")
     }
 }

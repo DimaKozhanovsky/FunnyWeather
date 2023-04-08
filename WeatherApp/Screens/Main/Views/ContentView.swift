@@ -6,30 +6,33 @@
 //
 
 import SwiftUI
-
+//
 struct ContentView: View {
     //MARK: - Properties
     init (){
        LocationManager.shared.sheduling()
     }
-//        @State var selectedTab : Tab =
+    @State var selectedTab : Int = 0
+        // seletedTb ,будет иметь тип пабтшер и дженерика параметр типа  интеджер в данном коде
+    // биндинг это обертка
     var body: some View {
         //MARK: - Body
        
-        TabView {
+        TabView(selection: $selectedTab, content: {
+            // когда жали на форкс то перерисовался табвью . так не было seleteatab по дефолту перерисовывалась тодей вью 
             TodayView()
                 .tabItem {
                     
                     Image(systemName:"sun.max")
                     Text("Today")
-                    
-                }
+                }.tag(0)
             ForecastView()
                 .tabItem{
+                    // кнопка на которую смы жали
                     Image(systemName:"cloud.sun.rain")
                     Text("Forecast")
-                }
-        }
+                }.tag(1)
+        })
     }
 }
 //        extension ContentView {

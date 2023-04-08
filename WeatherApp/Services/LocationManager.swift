@@ -9,7 +9,7 @@ import CoreLocation // Core Location provides services that determine a device�
 
 class LocationManager : NSObject ,ObservableObject { // ObservableOblect means that smt need to be observed
     private let manager = CLLocationManager()
-    static let shared = LocationManager() // creating an object to achive it anywhere singletone
+    static let shared = LocationManager() // creating an object to achive it anywhere singletone ,  обращаемся к этому объекту когда жмем однократно 
     var userLocation : CLLocation? //The latitude, longitude, and course information reported by the system
     
     override init()
@@ -24,22 +24,31 @@ class LocationManager : NSObject ,ObservableObject { // ObservableOblect means t
     }
     // updating location every time when we call this method
     
-   
+//    var timer : Timer?
     
     func sheduling ( ) {
-         Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(updateCurrentLocation), userInfo: nil, repeats: true)
-        print("it works")
+//        timer = Timer.scheduledTimer(timeInterval: 4 (если поставить 3600 то будет обновляться каждый час )  , target: self, selector: #selector(updateCurrentLocation), userInfo: nil, repeats: true)
+//       print("it works")
+//
+//        timer?.invalidate()
+        //Таймер очень бьеи по производительности !
        
-    }
-    @objc func updateCurrentLocation() {
-        
+        // таймер нужжно создать и уничтожить тут же чтоб он не рабботал постоянно
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
     }
+//    @objc func updateCurrentLocation() {
+//
+//        manager.requestAlwaysAuthorization()
+//        manager.startUpdatingLocation()
+//    }
 }
 
 extension LocationManager : CLLocationManagerDelegate{
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    // это попап о локации
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status:
+        CLAuthorizationStatus) {
+        //  метод каждый раз срабатывет когда мы выбирам что то (однократно  и тд)
         switch status {
         case .notDetermined:
             print("Debug: Not determined ")
@@ -56,7 +65,9 @@ extension LocationManager : CLLocationManagerDelegate{
             break
         }
     }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:
+    [CLLocation]) {
+        // метод вызывается много раз по дефолту ( может раз в секнду )
         guard let location = locations.last else {return}
         self.userLocation = location
         manager.stopUpdatingLocation() // take location and stop it

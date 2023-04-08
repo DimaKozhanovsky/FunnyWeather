@@ -61,11 +61,16 @@ class NetworkService  : Error {
             
             do {
                 // use try before function where rather just could be failed$
-                let weatherResponse = try   JSONDecoder().decode(AllDataForTodayWeatherModel.self, from: data)
+                let weatherResponse = try
+                
+                JSONDecoder().decode(AllDataForTodayWeatherModel.self, from: data)
                 complition(.success(weatherResponse))
-            } catch {
+            } catch(let error) {
+                print(error)
                 return complition(.failure(.decodingError))
+                
             }
+            
         }.resume()
     }
         func getForcastWether(location : CLLocation , complition : @escaping (Result<ForecastWeatherModel , NetworkError>) ->Void ) {  //defenition of the type of data for frozen enum Result for closure complition
@@ -83,7 +88,8 @@ class NetworkService  : Error {
                 do {
                 let weatherResponse = try JSONDecoder().decode(ForecastWeatherModel.self, from: data)
                 complition(.success(weatherResponse))
-                        } catch {
+                        } catch(let error) {
+                            print(error)
                         return complition(.failure(.decodingError))
                     }
                 }
