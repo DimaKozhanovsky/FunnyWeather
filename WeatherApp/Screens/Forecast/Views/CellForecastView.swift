@@ -13,23 +13,34 @@ struct CellForecastView: View {
     //статические функции как и статические свойства нужны для того чтобы не зависить от эксемпялра класса .
         //Статические свойства - свойства типа . Обращение к ним производится по имени класса.
     // static func как final class func
+  let  isDrawBordersOfCell : Bool 
+    
+  
+    
     var body: some View {
-        Spacer()
-        Text("London")
+        
        
-            .frame(width: 1, height: 2)
-        HStack {
-            
-            Spacer()
-        }
         
         ZStack{
             HStack {
-                Image(systemName: "cloud.rain")
-                    .previewDisplayName("Вася")
-                    .scaleEffect(2.3)
-                    .padding(34)
-                    .foregroundColor(Color.yellow)
+                if let imageCode = model?.weather?[0].icon{
+                    NetworkImageView(imageUrlString:Endpoints.reciveImage(code:imageCode)) {
+                        Image(systemName: "photo")
+                            
+                    } progressBlock: {
+                       ProgressView()
+                        
+                    }
+                    .frame(width: 100 , height: 100)
+                    //  если не указывать хеит то по ширене этой ячейки 
+
+                }
+               
+//                Text(String(model?.weather?[0].icon ?? "Нет иконки"))
+//                    .previewDisplayName("Вася")
+//                    .scaleEffect(2.3)
+//                    .padding(34)
+//                    .foregroundColor(Color.yellow)
                 VStack {
                     
                     //    Text(String(model.list[0].current.temperatureForecast ?? 44))
@@ -42,13 +53,18 @@ struct CellForecastView: View {
                     .padding(40)
                     .scaleEffect(2.5)
                     .foregroundColor(Color.blue)
+             
+                
             }
-            
-            Rectangle().stroke(lineWidth: 2).frame( idealWidth: .infinity,  maxHeight: 85 ).tag("1").foregroundColor(Color.blue)
-            
-            
+            if isDrawBordersOfCell {
+                Rectangle().stroke(lineWidth: 2).frame( idealWidth: .infinity,  maxHeight: 85 ).tag("1").foregroundColor(Color.blue)
+                
+            }
         }
         .padding(.horizontal , -15 )
+        .contentShape(Rectangle())
+        // контенйер шейп чтобы можно было тыкать потому что модификтор он там жестур кривой
+        
        
     }
     

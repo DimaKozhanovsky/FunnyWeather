@@ -11,6 +11,7 @@ import SwiftUI
 struct   ForecastBodyView : View {
     
     var model : ForecastWeatherModel? //  не должна быть опционалом если не @State и не @Binding ( нет инита )  , потому что форкаст это структура при перересовки стирается сылка на подкрепляющую её модельку . Это же структура)
+    @Binding var selectedModel : ForeCastForNextDays?
     var body: some View {
         VStack( spacing: 20){
             Image("MulticolorStripe")
@@ -22,10 +23,17 @@ struct   ForecastBodyView : View {
                 // we combined the computation and evaluation within a single statement by using if let.
                 List(list)
                 // пришло с сервера 40 вью
+                    
                 { item in      // делает ячейки на экране и 2-или 3 вне экрана (в зависимомти от размеров )
                     if #available(iOS 15.0, *) {
-                        CellForecastView(model: item)
+                        let isSelected = item.id == selectedModel?.id
+                        //id нужен чтобы сравнить 2 объекта один из способов  ,
+                        CellForecastView(model: item , isDrawBordersOfCell:isSelected)
+                            
                             .listRowSeparator(.hidden)
+                            .onTapGesture {
+                                selectedModel = item
+                            }
                     } else {
                         // Fallback on earlier versions
                     }
@@ -51,8 +59,8 @@ struct   ForecastBodyView : View {
 
 
 
-struct ForecastBodyView_Previews : PreviewProvider {
-    static var previews: some View {
-        ForecastBodyView()
-    }
-}
+//struct ForecastBodyView_Previews : PreviewProvider {
+//    static var previews: some View {
+////        ForecastBodyView()
+//    }
+//}

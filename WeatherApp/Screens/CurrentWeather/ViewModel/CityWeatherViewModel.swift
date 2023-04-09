@@ -12,6 +12,7 @@ enum TodayViewState {
     case idle
     case error
     case recievedWheather(TodayWheatherModel)
+        // кейс имеет значение внктри себя ( чтобы содать послений кейс нужно пердать в него ( в кейс) TodayWheatherModel)
 }
 
 
@@ -19,9 +20,11 @@ enum TodayViewState {
 final class CityWeatherViewModel: ObservableObject {
     //MARK: - Properties
     @Published var state: TodayViewState = .idle
+    // переменная говорит овечает за состояние нашего вью
      
     
     func getData() {
+        
         let location = LocationManager.shared.userLocation
         NetworkService.shared.getWeather(location: location ?? CLLocation(latitude:51.509865,   longitude: -0.118092)) { result in
             DispatchQueue.main.async {
@@ -30,6 +33,7 @@ final class CityWeatherViewModel: ObservableObject {
                     print(error)
                     self.state = .error
                 case .success(let model):
+                        //
                     let wheather = TodayWheatherModel(model:model , imageData: nil, shareWheather: self.shareWheather)
                     self.state = .recievedWheather(wheather)
                     self.getWeatherIcon(model: model  )
@@ -41,21 +45,25 @@ final class CityWeatherViewModel: ObservableObject {
     }
     //MARK : Publik Methods
     // Get  image  from the server and is displayed it via using main tread  
-    func getWeatherIcon(model : AllDataForTodayWeatherModel ){
         
+    func getWeatherIcon(model : AllDataForTodayWeatherModel ){
+       // тут только описние
         let imageCode = model.weather.first?.codeIcon
         guard let imageCode = imageCode else {
             return
         }
         NetworkService.shared.getImage(imageCode: imageCode) { (result) in
+                //  в резаулт ловлю то что пришло в дату
             guard let result = result else {
                 return
             }
             DispatchQueue.main.async {
-            
+                // любое отоображение на вью через  мейн поток юрд сешшион всегда в бекраунде
                 self.state = TodayViewState.recievedWheather(TodayWheatherModel(model: model, imageData: result, shareWheather: self.shareWheather ))
+                    // указываем через селф потому чо в кложуре в  self.state = TodayViewState в энам ложим TodayWheatherModel
             }
         }
+        // второй параметр до скобок
     }
     
    // This function is set the titles of the wind

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
 enum NetworkError: Error { // simple enum to handle network erors from the side of the server
     case badUrl
@@ -35,7 +36,9 @@ extension URL { // A simple extension helps us to prevent  the force unwrap we l
 
 
 class NetworkService  : Error {
-    
+ 
+
+    typealias Headers = [String: Any]
     let imageCache = NSCache<NSString,NSData>()
     
     static let shared = NetworkService()
@@ -122,5 +125,19 @@ class NetworkService  : Error {
         }.resume()
       }
     }
+    func getImage(
+            url: URL,
+            headers: Headers
+        ) -> AnyPublisher<Data, URLError> {
+            var urlRequest = URLRequest(url: url)
+            
+            headers.forEach { (key, value) in
+                if let value = value as? String {
+                    urlRequest.setValue(value, forHTTPHeaderField: key)
+                }
+            }
+            
+            return URLSession.shared.dataTaskPublisher(for: urlRequest).map(\.data).eraseToAnyPublisher()
+        }
 
 }

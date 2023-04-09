@@ -23,7 +23,7 @@ struct ForecastView : View {
         case .recivedForecastWheather(let model):
             //declaring a value as let means that it is a constant i.e. immutable
             //you are getting the warning because instead of modifying the value as you intended, you are redeclaring it within the scope
-            ForecastBodyView(model: model)
+            ForecastBodyView(model: model,selectedModel: $forecastViewModel.selectedCell)
         }
         
     }

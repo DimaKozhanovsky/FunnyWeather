@@ -16,6 +16,8 @@
 		CA370AF9285DB5E40021757A /* ForecastBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA370AF8285DB5E30021757A /* ForecastBodyView.swift */; };
 		CA370AFB285DB64F0021757A /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA370AFA285DB64F0021757A /* ForecastViewModel.swift */; };
 		CA370AFD285DB7630021757A /* ForecastWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA370AFC285DB7630021757A /* ForecastWeatherModel.swift */; };
+		CA3ABB8E29E3075F00153D71 /* NetworkImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3ABB8D29E3075F00153D71 /* NetworkImageViewModel.swift */; };
+		CA3ABB9029E307A900153D71 /* NetworkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3ABB8F29E307A900153D71 /* NetworkImageView.swift */; };
 		CA4B668D286F547F001B3419 /* CellForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4B668C286F547F001B3419 /* CellForecastView.swift */; };
 		CA593B3B28205F8B00680A50 /* TodayBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA593B3A28205F8B00680A50 /* TodayBodyView.swift */; };
 		CA7500D42840DBAD00B43949 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7500D32840DBAD00B43949 /* LocationManager.swift */; };
@@ -37,6 +39,8 @@
 		CA370AF8285DB5E30021757A /* ForecastBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastBodyView.swift; sourceTree = "<group>"; };
 		CA370AFA285DB64F0021757A /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		CA370AFC285DB7630021757A /* ForecastWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherModel.swift; sourceTree = "<group>"; };
+		CA3ABB8D29E3075F00153D71 /* NetworkImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageViewModel.swift; sourceTree = "<group>"; };
+		CA3ABB8F29E307A900153D71 /* NetworkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageView.swift; sourceTree = "<group>"; };
 		CA4B668C286F547F001B3419 /* CellForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForecastView.swift; sourceTree = "<group>"; };
 		CA593B3A28205F8B00680A50 /* TodayBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayBodyView.swift; sourceTree = "<group>"; };
 		CA7500D32840DBAD00B43949 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -113,6 +117,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CA3ABB8C29E306FB00153D71 /* NetworkImages */ = {
+			isa = PBXGroup;
+			children = (
+				CA3ABB8D29E3075F00153D71 /* NetworkImageViewModel.swift */,
+				CA3ABB8F29E307A900153D71 /* NetworkImageView.swift */,
+			);
+			path = NetworkImages;
+			sourceTree = "<group>";
+		};
 		CA6B402D281C1BCD005F5927 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +144,7 @@
 		CA6B402F281C1E37005F5927 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CA3ABB8C29E306FB00153D71 /* NetworkImages */,
 				CA7500D32840DBAD00B43949 /* LocationManager.swift */,
 				CAB5FC5F281ED02900BBD179 /* NetworkService.swift */,
 				CAB5FC61281ED69600BBD179 /* Endpoints.swift */,
@@ -287,6 +301,7 @@
 				CAB5FC55281ECB4200BBD179 /* AllDataForTodayWeatherModel.swift in Sources */,
 				CA4B668D286F547F001B3419 /* CellForecastView.swift in Sources */,
 				CAB5FC5E281ECEDF00BBD179 /* CityWeatherViewModel.swift in Sources */,
+				CA3ABB9029E307A900153D71 /* NetworkImageView.swift in Sources */,
 				CA7500D42840DBAD00B43949 /* LocationManager.swift in Sources */,
 				CA2708AF28145827000A9164 /* TodayView.swift in Sources */,
 				CA9E3C99283A8233009D4411 /*  TodayWheatherModel.swift in Sources */,
@@ -297,6 +312,7 @@
 				CA370AFB285DB64F0021757A /* ForecastViewModel.swift in Sources */,
 				CAB5FC60281ED02900BBD179 /* NetworkService.swift in Sources */,
 				CA593B3B28205F8B00680A50 /* TodayBodyView.swift in Sources */,
+				CA3ABB8E29E3075F00153D71 /* NetworkImageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
