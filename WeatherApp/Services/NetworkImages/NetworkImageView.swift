@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import Combine
 
 struct NetworkImageView<Placeholder: View, ProgressBlock: View>: View {
     
