@@ -8,23 +8,34 @@
 import SwiftUI
 import CoreLocationUI
 
+@available(iOS 15.0, *)
 struct TodayBodyView: View {
     
     //MARK: - Properties
     var model : TodayWheatherModel
-//@State var isShowLocationView = false
-  
+    // тут получаем данные в структуре TodayWheatherModel
+    
+    @State var isShowShareView = false
+    
     let weatherPlaceHolder = UIImage(systemName: "thermometer.sun")!
+    //forced unwrapping (a!) to access the value wrapped inside a when a isn’t nil
+    //
     //MARK: - Body
     var body: some View {
         VStack(alignment: .center ) {
             Text("Today")
+                //  Button(action: model.shareWheather, label:{ Text("Share")})
+            
+            
+        
+
             Image("MulticolorStripe")
                 .frame(width: 1, height: 2)
             Spacer()
             Group{ 
                 if let imageData = model.imageData {
                     Image(uiImage: UIImage(data: imageData) ?? weatherPlaceHolder)
+                    //The nil-coalescing operator
                 }
                 else {
                     Image(uiImage: weatherPlaceHolder)
@@ -33,17 +44,20 @@ struct TodayBodyView: View {
                 Text(model.model.name + ", " + model.model.sys.country)
                 Text( String(model.model.main.temp) + "°C |" + (model.model.weather[0]).main)
                     .foregroundColor(.blue)
+                    //. A modifier is a function itself Viewt hat returns self after some modifications have been made.
             }
          
             
-            if #available(iOS 15.0, *) {
-                LocationButton(.shareCurrentLocation){
-                    
-                }
-            } else {
-                // Fallback on earlier versions
+            Button {
+                isShowShareView = true
+                    // в кложуре мы вызываем вызываем внутри функции
+                    //    shareWheather()
+            } label: {
+                
+                Text("Share")
             }
-           
+            .background(Color.red)
+            //Share  шит вызвать на самом верхнем для старых осей 
 //            Button(action: {
 //                isShowLocationView = true
 //            }) {
@@ -110,6 +124,11 @@ struct TodayBodyView: View {
 //
 //        }
     }
+        .sheet(isPresented: $isShowShareView) {
+            ShareSheet(activityItems: [model.model.name," " , String(model.model.main.temp)] )
+            
+        }
+        
       //  .preferredColorScheme(.dark)
 }
         

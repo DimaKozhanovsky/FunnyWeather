@@ -9,5 +9,5 @@ import Foundation
 struct TodayWheatherModel { //The default memberwise initializer 
     var model: AllDataForTodayWeatherModel
     var imageData : Data?
-    var shareWheather : ()->()
+    var shareWheather : ()->()//она подходит 
 }

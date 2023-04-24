@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA21328429F70CE300CFA35D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA21328329F70CE300CFA35D /* ShareViewController.swift */; };
 		CA27089F281455DD000A9164 /* WeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA27089E281455DD000A9164 /* WeatherApp.swift */; };
 		CA2708A1281455DD000A9164 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2708A0281455DD000A9164 /* ContentView.swift */; };
 		CA2708A3281455DF000A9164 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA2708A2281455DF000A9164 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA21328329F70CE300CFA35D /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		CA27089B281455DD000A9164 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA27089E281455DD000A9164 /* WeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApp.swift; sourceTree = "<group>"; };
 		CA2708A0281455DD000A9164 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				CA3ABB8F29E307A900153D71 /* NetworkImageView.swift */,
+				CA21328329F70CE300CFA35D /* ShareViewController.swift */,
 				CAF5ECBB29F1BBEA00BF29BE /* ImageViewModel.swift */,
 			);
 			path = NetworkImages;
@@ -302,6 +305,7 @@
 				CA4B668D286F547F001B3419 /* CellForecastView.swift in Sources */,
 				CAB5FC5E281ECEDF00BBD179 /* CityWeatherViewModel.swift in Sources */,
 				CA3ABB9029E307A900153D71 /* NetworkImageView.swift in Sources */,
+				CA21328429F70CE300CFA35D /* ShareViewController.swift in Sources */,
 				CA7500D42840DBAD00B43949 /* LocationManager.swift in Sources */,
 				CA2708AF28145827000A9164 /* TodayView.swift in Sources */,
 				CA9E3C99283A8233009D4411 /*  TodayWheatherModel.swift in Sources */,

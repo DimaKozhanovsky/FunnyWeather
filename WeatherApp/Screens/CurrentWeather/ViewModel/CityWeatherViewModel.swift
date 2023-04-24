@@ -12,15 +12,16 @@ enum TodayViewState {
     case idle
     case error
     case recievedWheather(TodayWheatherModel)
-        // кейс имеет значение внктри себя ( чтобы содать послений кейс нужно пердать в него ( в кейс) TodayWheatherModel)
+        // кейс имеет значение внутри себя ( чтобы содать последний кейс нужно передать в него ( в кейс) TodayWheatherModel)
 }
 
 
 //manage state from external objects with ObservableObject
 final class CityWeatherViewModel: ObservableObject {
+    
     //MARK: - Properties
     @Published var state: TodayViewState = .idle
-    // переменная говорит овечает за состояние нашего вью
+    // переменная  отвечает за состояние нашего вью
      
     
     func getData() {
