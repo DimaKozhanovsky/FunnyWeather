@@ -13,4 +13,5 @@ using Cocoapods)
  8. Share weather as text
 <img width="745" alt="Снимок экрана 2022-04-21 в 21 03 49" src="https://user-images.githubusercontent.com/74324758/164523406-964ae6fe-e2dc-4211-93cf-464ac2efb505.png">
 
-![Demo](https://user-images.githubusercontent.com/74324758/231976112-714c6cf4-61af-4588-b6b6-1d6996de58b8.gif)
+https://user-images.githubusercontent.com/74324758/234112100-43a039b0-19e2-4367-a703-f82c7e2911c2.mov
+
