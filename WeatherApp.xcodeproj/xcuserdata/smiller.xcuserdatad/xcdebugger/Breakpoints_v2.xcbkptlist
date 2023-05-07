@@ -52,21 +52,5 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "44099193-4AB2-43A7-9680-FD63E04CE7BB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp/Services/NetworkImages/NetworkImageView.swift"
-            startingColumnNumber = "9"
-            endingColumnNumber = "23"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "init(imageUrlString:@ViewBuilder:@ViewBuilder:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
