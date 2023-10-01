@@ -1,5 +1,5 @@
 # WeatherAPP
-## Weather  Aplication ( task test ) for the position junior IOS developer 
+## Weather  Aplication ( task - test ) for the position junior IOS developer 
 ### I would like to show how i can utilize Swift UI 
 Project Requirements :
 1. Swift 5.* versions
