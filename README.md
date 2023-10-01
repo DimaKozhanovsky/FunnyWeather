@@ -21,3 +21,7 @@ Tests :
 
 https://user-images.githubusercontent.com/74324758/236752775-b1d8c0fb-cd0f-4084-9e2a-c02297ad2353.mov
 
+Tests :
+
+https://github.com/DimaKozhanovsky/FunnyWeather/assets/74324758/a6d5fb33-5ba1-4dfd-b814-1b226caa3316
+
